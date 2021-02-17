@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CekWarteg</string>
     <string name="name_headline">Ready for looking perfect Warteg?</string>
     <string name="get_started">Get Started</string>
-    <string name="log_in_to_warteg">Log in To Warteg</string>
 </resources>
