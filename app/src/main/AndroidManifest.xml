@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CekWarteg">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".RegisterAdmin"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterAdmin" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".StartActivity">
