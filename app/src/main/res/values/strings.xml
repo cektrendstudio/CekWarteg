@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CekWarteg</string>
+    <string name="register">Register</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
