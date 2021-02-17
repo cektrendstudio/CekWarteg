@@ -10,9 +10,9 @@
             android:title="Data Menu"/>
         <item
             android:id="@+id/nav_ulasan"
-            android:title="Ulasan" />
+            android:title="Review" />
         <item
             android:id="@+id/nav_profile"
-            android:title="Profile" />
+            android:title="Edit Profile" />
     </group>
 </menu>
