@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFBD2F"
+    android:background="@color/backgroundColor"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -43,7 +43,7 @@
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:autofillHints="@string/username"
             android:background="@drawable/button"
             android:hint="@string/username"
@@ -101,11 +101,12 @@
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="65dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:background="@drawable/button"
+            android:backgroundTint="@color/white"
             android:text="Register your Warteg"
+            app:cornerRadius="5dp"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
