@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CekWarteg">
         <activity android:name=".Welcome"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterAdmin" />
         <activity android:name=".MenuActivity" />
