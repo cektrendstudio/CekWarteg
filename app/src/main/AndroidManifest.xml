@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CekWarteg">
         <activity android:name=".DetailWartegActivity"/>
-        <activity android:name=".StartActivity" />
+        <activity android:name=".DataMenuActivity" />
+        <activity android:name=".StartActivity"></activity>
         <activity android:name=".DetailMenuActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
@@ -20,7 +21,6 @@
         <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
