@@ -10,12 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CekWarteg">
         <activity android:name=".StartActivity"></activity>
-        <activity android:name=".Welcome" />
+        <activity android:name=".DetailMenuActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterAdmin" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".DetailMenuActivity">
+        <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
