@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+
+import org.json.JSONArray;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edtUsername, edtPassword;
     Button btnLogin, btnRegister;
@@ -17,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponents();
+        AndroidNetworking.initialize(getApplicationContext());
         clickListener();
     }
 
@@ -36,13 +44,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btn_login) {
-            Intent dashboard = new Intent(LoginActivity.this, DashboardActivity.class);
-            startActivity(dashboard);
-            finish();
+            String username = edtUsername.getText().toString().trim();
+            String password = edtPassword.getText().toString().trim();
+            if (!username.isEmpty() || !password.isEmpty()) {
+                login(username, password);
+            } else {
+                edtUsername.setError("Please insert your username");
+                edtPassword.setError("Please insert your password");
+            }
         } else if (id == R.id.btn_register) {
-            Intent register = new Intent(LoginActivity.this, RegisterAdmin.class);
-            startActivity(register);
+            startActivity(new Intent(LoginActivity.this, RegisterAdmin.class));
             finish();
         }
+    }
+
+    private void login(String username, String password) {
+        AndroidNetworking.post("http://103.146.203.97/api/...")
+                .addBodyParameter("username", username)
+                .addBodyParameter("password", password)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
     }
 }
