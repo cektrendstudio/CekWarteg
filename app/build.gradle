@@ -12,6 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "BASE_URL", "\"http://103.146.203.97/\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

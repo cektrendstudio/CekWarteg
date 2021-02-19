@@ -9,7 +9,7 @@
     tools:context=".DetailWartegActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/img_warteg"
         android:layout_width="328dp"
         android:layout_height="168dp"
         android:layout_marginTop="15dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_warteg_name"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_favorite"
         app:layout_constraintHorizontal_bias="0.323"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/img_warteg" />
 
     <Button
         android:id="@+id/btn_favorite"
@@ -43,10 +43,10 @@
         android:layout_marginEnd="28dp"
         android:background="@drawable/ic_baseline_favorite_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/img_warteg" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tv_warteg_desc"
         android:layout_width="328dp"
         android:layout_height="61dp"
         android:layout_marginTop="16dp"
@@ -57,13 +57,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warteg_name" />
 
     <androidx.appcompat.widget.AppCompatRatingBar
-        android:id="@+id/rating_toko"
+        android:id="@+id/rating_warteg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:numStars="5"
         android:progressBackgroundTint="#B7B7B7"
         android:progressTint="@color/backgroundColor"
@@ -71,9 +71,9 @@
         android:secondaryProgressTint="@color/backgroundColor"
         android:stepSize="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warteg_desc" />
 
     <TextView
         android:id="@+id/textView9"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating_toko" />
+        app:layout_constraintTop_toBottomOf="@+id/rating_warteg" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -108,6 +108,7 @@
             android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_best_menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -143,6 +144,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_others_menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

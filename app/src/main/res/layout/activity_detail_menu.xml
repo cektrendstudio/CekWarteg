@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tv_menu_name"
         android:layout_width="321dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/img_menu" />
 
     <TextView
-        android:id="@+id/desc_menu"
+        android:id="@+id/tv_menu_desc"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_menu_name" />
 
     <TextView
         android:id="@+id/textView5"
@@ -72,24 +72,23 @@
         android:rating="0"
         android:secondaryProgressTint="@color/backgroundColor"
         android:stepSize="0.5"
-        app:layout_constraintBottom_toTopOf="@+id/edt_nama"
+        app:layout_constraintBottom_toTopOf="@+id/edt_reviewer_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/edt_nama"
+        android:id="@+id/edt_reviewer_name"
         android:layout_width="328dp"
         android:layout_height="55dp"
         android:layout_marginBottom="13dp"
         android:background="@drawable/button"
         android:hint="Nama"
+        android:inputType="textPersonName"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:inputType="textPersonName"
         app:cornerRadius="5dp"
         app:layout_constraintBottom_toTopOf="@+id/edt_ulasan"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,18 +101,18 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/button"
         android:hint="Masukan Ulasan"
+        android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:inputType="text"
         app:cornerRadius="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeWidth="3dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_submit"
         android:layout_width="328dp"
         android:layout_height="56dp"
         android:text="Submit"
