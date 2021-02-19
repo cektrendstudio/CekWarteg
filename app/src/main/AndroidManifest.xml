@@ -16,7 +16,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterAdmin" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".DashboardActivity" >
+        </activity>
         <activity android:name=".Welcome" />
         <activity android:name=".StartActivity">
             <intent-filter>

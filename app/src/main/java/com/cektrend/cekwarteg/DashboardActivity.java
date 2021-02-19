@@ -1,5 +1,6 @@
 package com.cektrend.cekwarteg;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
@@ -55,12 +57,17 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.nav_dashboard:
                 fragmentClass = DashboardFragment.class;
                 break;
-                case R.id.nav_data_menu:
+            case R.id.nav_data_menu:
                 fragmentClass = DataMenuFragment.class;
                 break;
             case R.id.nav_ulasan:
-            default:
                 fragmentClass = UlasanFragment.class;
+                break;
+            case R.id.nav_profile:
+                fragmentClass = ProfileFragment.class;
+                break;
+            default:
+                fragmentClass = DashboardFragment.class;
         }
 
         try {
@@ -75,7 +82,7 @@ public class DashboardActivity extends AppCompatActivity {
         mDrawer.closeDrawers();
 
         if (menuItem.getItemId() == R.id.nav_dashboard) {
-            setTitle("CekWarteg");
+            setTitle("Dashboard");
         } else {
             setTitle(menuItem.getTitle());
         }
