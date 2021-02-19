@@ -1,6 +1,5 @@
 package com.cektrend.cekwarteg;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,10 +7,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.cektrend.cekwarteg.R;
-import com.cektrend.cekwarteg.DataMenuFragment;
-import com.cektrend.cekwarteg.UlasanFragment;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;

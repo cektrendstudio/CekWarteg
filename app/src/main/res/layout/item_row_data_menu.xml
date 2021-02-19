@@ -22,7 +22,7 @@
         tools:src="@drawable/img_kangkung" />
 
     <TextView
-        android:id="@+id/txt_menu_name"
+        android:id="@+id/tv_menu_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -43,7 +43,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@id/iv_data_menu"
-        app:layout_constraintTop_toBottomOf="@id/txt_menu_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_menu_name"
         tools:src="@drawable/draw_love" />
 
 
