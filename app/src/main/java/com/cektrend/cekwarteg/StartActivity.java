@@ -2,13 +2,21 @@ package com.cektrend.cekwarteg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import static com.cektrend.cekwarteg.LoginActivity.MY_SHARED_PREFERENCES;
+import static com.cektrend.cekwarteg.LoginActivity.SESSION_STATUS;
+
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
-Button btnLogin, btnStarted;
+    Button btnLogin, btnStarted;
+    SharedPreferences sharedPreferences;
+    Boolean session = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +28,13 @@ Button btnLogin, btnStarted;
     private void initComponents() {
         btnLogin = findViewById(R.id.btn_login);
         btnStarted = findViewById(R.id.btn_started);
+        sharedPreferences = getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        session = sharedPreferences.getBoolean(SESSION_STATUS, false);
+        if (session) {
+            Intent intent = new Intent(StartActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void clickListener() {
