@@ -20,13 +20,11 @@ import java.util.ArrayList;
 
 public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.WartegViewHolder> {
     ArrayList<DataWarteg> listWarteg;
-    private ItemClickListener mClickListener;
     private final Context mCtx;
     private final Activity parentActivity;
 
-    public ListWartegAdapter(ArrayList<DataWarteg> listWarteg, ItemClickListener mClickListener, Context mCtx, Activity parentActivity) {
+    public ListWartegAdapter(ArrayList<DataWarteg> listWarteg, Context mCtx, Activity parentActivity) {
         this.listWarteg = listWarteg;
-        this.mClickListener = mClickListener;
         this.mCtx = mCtx;
         this.parentActivity = parentActivity;
     }
@@ -73,28 +71,6 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
                     .into(imgWarteg2);
         }
 
-        public void onClick(View view) {
-            if (mClickListener != null)
-                mClickListener.onItemClick(view, getAdapterPosition());
-        }
     }
 
-    String getItem(int id) {
-        return listWarteg.get(id).getCode();
-    }
-
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    void setFilter(ArrayList<DataWarteg> filterList) {
-        listWarteg = new ArrayList<>();
-        listWarteg.addAll(filterList);
-        notifyDataSetChanged();
-    }
 }
