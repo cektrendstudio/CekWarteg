@@ -1,6 +1,6 @@
 package com.cektrend.cekwarteg.data;
 
-public class DataMenu {
+public class DataMenuOwner {
     private Integer id;
     private String code;
     private String name;
@@ -9,8 +9,17 @@ public class DataMenu {
     private Boolean is_have_stock;
     private String created_at;
     private String updated_at;
+    private String photo;
 
-    public DataMenu(Integer id, String code, String name, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at) {
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public DataMenuOwner(Integer id, String code, String name, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at, String photo) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -19,6 +28,7 @@ public class DataMenu {
         this.is_have_stock = is_have_stock;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.photo = photo;
     }
 
     public Integer getId() {

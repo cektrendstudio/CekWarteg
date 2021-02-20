@@ -31,19 +31,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Boolean is_approve = false;
     Boolean session = false;
     String userName;
-    public static final String my_shared_preferences = "my_shared_preferences";
-    public static final String session_status = "session_status";
-    public static final String session_username = "session_username";
+    Integer id;
+    public static final String MY_SHARED_PREFERENCES = "my_shared_preferences";
+    public static final String SESSION_STATUS = "session_status";
+    public static final String SESSION_USERNAME = "session_username";
+    public static final String WARTEG_ID = "warteg_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponents();
-        sharedPreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
         clickListener();
-        session = sharedPreferences.getBoolean(session_status, false);
+        session = sharedPreferences.getBoolean(SESSION_STATUS, false);
         if (session) {
             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
             finish();
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pDialog.setCancelable(false);
         pDialog.setMessage("Verifikasi...");
         showDialog();
-        AndroidNetworking.post("http://103.146.203.97/api/auth/login")
+        AndroidNetworking.post(BuildConfig.BASE_URL + "api/auth/login")
                 .addBodyParameter("username", username)
                 .addBodyParameter("password", password)
                 .setPriority(Priority.MEDIUM)
@@ -100,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 JSONObject data = response.getJSONObject("user");
                                 userName = data.getString("username");
                                 is_approve = data.getBoolean("is_approve");
+                                id = data.getInt("id");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -109,10 +112,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (is_approve) {
                             Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(session_status, true);
-                            editor.putString(session_username, userName);
+                            editor.putBoolean(SESSION_STATUS, true);
+                            editor.putString(SESSION_USERNAME, userName);
+                            editor.putString(WARTEG_ID, String.valueOf(id));
                             editor.apply();
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            Intent login = new Intent(LoginActivity.this, DashboardActivity.class);
+                            startActivity(login);
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_SHORT).show();
                             edtPassword.setText("");
