@@ -23,6 +23,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.SESSION_STATUS;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.SESSION_USERNAME;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.TOKEN;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_ID;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_NAME;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_PHOTO;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edtUsername, edtPassword;
     Button btnLogin, btnRegister;
@@ -30,12 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences;
     Boolean is_approve = false;
     Boolean session = false;
-    String userName;
+    String userName, myToken, wartegName, wartegPhoto;
     Integer id;
-    public static final String MY_SHARED_PREFERENCES = "my_shared_preferences";
-    public static final String SESSION_STATUS = "session_status";
-    public static final String SESSION_USERNAME = "session_username";
-    public static final String WARTEG_ID = "warteg_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +107,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 userName = data.getString("username");
                                 is_approve = data.getBoolean("is_approve");
                                 id = data.getInt("id");
+                                wartegName = data.getString("name");
+                                wartegPhoto = data.getString("photo_profile");
+                                myToken = data.getString("access_token");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -115,6 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.putBoolean(SESSION_STATUS, true);
                             editor.putString(SESSION_USERNAME, userName);
                             editor.putString(WARTEG_ID, String.valueOf(id));
+                            editor.putString(WARTEG_NAME, wartegName);
+                            editor.putString(WARTEG_PHOTO, wartegPhoto);
+                            editor.putString(TOKEN, String.valueOf(id));
                             editor.apply();
                             Intent login = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(login);

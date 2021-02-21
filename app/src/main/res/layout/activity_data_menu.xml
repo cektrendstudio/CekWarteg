@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".DataMenuActivity">
 
+    <include
+        android:id="@+id/toolbar_add_datamenu"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/tv_menu_event"
         android:layout_width="wrap_content"
@@ -18,7 +24,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_add_datamenu" />
 
     <EditText
         android:id="@+id/edt_menu_name"
