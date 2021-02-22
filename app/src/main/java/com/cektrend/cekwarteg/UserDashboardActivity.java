@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class UserDashboardActivity extends AppCompatActivity {
-    EditText edtSearchMenu;
+    EditText edtSearch;
     ProgressDialog pDialog;
     ListWartegAdapter adapter;
     ArrayList<DataWarteg> dataWartegs = new ArrayList<>();
@@ -42,7 +42,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        edtSearchMenu = findViewById(R.id.edt_search);
+        edtSearch = findViewById(R.id.edt_search);
         recyclerView = findViewById(R.id.rv_warteg);
     }
 
@@ -59,12 +59,12 @@ public class UserDashboardActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
-                            Log.d("TAG", "String " + response.getString("data"));
+//                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
+//                            Log.d("TAG", "String " + response.getString("data"));
                             JSONArray jsonArray = response.getJSONArray("data");
-                            Log.d("TAG", "Lenght" + jsonArray.length());
+//                            Log.d("TAG", "Lenght" + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                Log.d("TAG", "jason" + jsonArray.get(i));
+//                                Log.d("TAG", "jason" + jsonArray.get(i));
                                 JSONObject data = jsonArray.getJSONObject(i);
                                 dataWartegs.add(new DataWarteg(data.getString("id"),
                                         data.getString("code"),
