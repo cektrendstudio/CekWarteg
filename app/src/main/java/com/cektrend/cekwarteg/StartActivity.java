@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import static com.cektrend.cekwarteg.LoginActivity.MY_SHARED_PREFERENCES;
-import static com.cektrend.cekwarteg.LoginActivity.SESSION_STATUS;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.SESSION_STATUS;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnLogin, btnStarted;
