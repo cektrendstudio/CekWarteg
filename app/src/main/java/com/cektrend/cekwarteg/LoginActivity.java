@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ProgressDialog pDialog;
     SharedPreferences sharedPreferences;
     Boolean is_approve = false;
+    Boolean isSuccess = false;
     Boolean session = false;
     String userName, myToken, wartegName, wartegPhoto;
     Integer id;
@@ -109,14 +110,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 id = data.getInt("id");
                                 wartegName = data.getString("name");
                                 wartegPhoto = data.getString("photo_profile");
-                                myToken = data.getString("access_token");
+                                myToken = response.getString("access_token");
+                                isSuccess = response.getBoolean("isSuccess");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
 
-                        if (is_approve) {
+                        if (isSuccess) {
                             Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean(SESSION_STATUS, true);
@@ -124,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.putString(WARTEG_ID, String.valueOf(id));
                             editor.putString(WARTEG_NAME, wartegName);
                             editor.putString(WARTEG_PHOTO, wartegPhoto);
-                            editor.putString(TOKEN, String.valueOf(id));
+                            editor.putString(TOKEN, myToken);
                             editor.apply();
                             Intent login = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(login);
