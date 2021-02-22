@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.cektrend.cekwarteg.adapter.ListWartegAdapter;
 import com.cektrend.cekwarteg.model.DataWarteg;
 
@@ -55,15 +57,15 @@ public class Welcome extends AppCompatActivity {
         AndroidNetworking.get("http://103.146.203.97/api/warteg")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+                .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            for (int i = 0; i < response.length();
+                            JSONArray jsonArray = new JSONArray(response.getJSONObject("data"));
+                            for (int i = 0; i < jsonArray.length();
                                  i++) {
-                                JSONObject data =
-                                        response.getJSONObject(i);
+                                JSONObject data = jsonArray.getJSONObject(i);
                                 dataWartegs.add(new DataWarteg(data.getString("code"), data.getString("name"), data.getString("email"), data.getString("owner_name"), data.getString("address"), data.getString("phone"), data.getString("description"), data.getString("photo_profile")));
                             }
                             adapter = new ListWartegAdapter(dataWartegs, getApplicationContext(), Welcome.this);
@@ -76,6 +78,7 @@ public class Welcome extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         Toast.makeText(getApplicationContext(), "Gagal memuat, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "Pesan", error);
                         hideDialog();
                     }
                 });
