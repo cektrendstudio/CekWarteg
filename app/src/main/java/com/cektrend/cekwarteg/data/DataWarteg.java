@@ -1,6 +1,7 @@
-package com.cektrend.cekwarteg.model;
+package com.cektrend.cekwarteg.data;
 
 public class DataWarteg {
+    private String id;
     private String code;
     private String name;
     private String email;
@@ -10,7 +11,8 @@ public class DataWarteg {
     private String description;
     private String photo_profile;
 
-    public DataWarteg(String code, String name, String email, String owner_name, String address, String phone, String description, String photo_profile) {
+    public DataWarteg(String id, String code, String name, String email, String owner_name, String address, String phone, String description, String photo_profile) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.email = email;
@@ -19,6 +21,14 @@ public class DataWarteg {
         this.phone = phone;
         this.description = description;
         this.photo_profile = photo_profile;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCode() {

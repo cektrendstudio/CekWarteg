@@ -2,20 +2,23 @@ package com.cektrend.cekwarteg.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.cektrend.cekwarteg.DetailWartegActivity;
 import com.cektrend.cekwarteg.R;
-import com.cektrend.cekwarteg.data.DataMenuOwner;
-import com.cektrend.cekwarteg.model.DataWarteg;
+import com.cektrend.cekwarteg.data.DataWarteg;
 
 import java.util.ArrayList;
 
@@ -45,6 +48,20 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
                 .load(datalist.get(position).getPhoto_profile())
                 .apply(new RequestOptions().override(200, 100))
                 .into(holder.imgWarteg);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Warteg " + datalist.get(position).getName() + " Di Klik!", Toast.LENGTH_SHORT).show();
+                Intent detWarteg = new Intent(context, DetailWartegActivity.class);
+                detWarteg.putExtra("id", datalist.get(position).getId());
+                detWarteg.putExtra("photo_profile", datalist.get(position).getPhoto_profile());
+                detWarteg.putExtra("name", datalist.get(position).getName());
+                detWarteg.putExtra("description", datalist.get(position).getDescription());
+                detWarteg.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(detWarteg);
+                parentActivity.finish();
+            }
+        });
     }
 
     @Override
@@ -55,11 +72,13 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
     public class WartegViewHolder extends RecyclerView.ViewHolder {
         TextView wartegName;
         ImageView imgWarteg;
+        ConstraintLayout layout;
 
         WartegViewHolder(@NonNull View itemView) {
             super(itemView);
             wartegName = itemView.findViewById(R.id.warteg_name);
             imgWarteg = itemView.findViewById(R.id.img_warteg);
+            layout = itemView.findViewById(R.id.layout);
         }
 
         public void onClick(View view) {

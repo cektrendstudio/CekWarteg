@@ -15,7 +15,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.cektrend.cekwarteg.adapter.ListWartegAdapter;
-import com.cektrend.cekwarteg.model.DataWarteg;
+import com.cektrend.cekwarteg.data.DataWarteg;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,12 +62,12 @@ public class UserDashboardActivity extends AppCompatActivity {
                             Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
                             Log.d("TAG", "String " + response.getString("data"));
                             JSONArray jsonArray = response.getJSONArray("data");
-//                            JSONObject jsonObject = new JSONObject(response.getJSONArray("data"));
-                            Log.e("TAG", "Lenght" + jsonArray.length());
+                            Log.d("TAG", "Lenght" + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 Log.d("TAG", "jason" + jsonArray.get(i));
                                 JSONObject data = jsonArray.getJSONObject(i);
-                                dataWartegs.add(new DataWarteg(data.getString("code"),
+                                dataWartegs.add(new DataWarteg(data.getString("id"),
+                                        data.getString("code"),
                                         data.getString("name"),
                                         data.getString("email"),
                                         data.getString("owner_name"),
