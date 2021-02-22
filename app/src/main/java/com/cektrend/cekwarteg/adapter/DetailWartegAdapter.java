@@ -26,15 +26,15 @@ import com.cektrend.cekwarteg.data.DataWarteg;
 import java.util.ArrayList;
 
 public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapter.WartegViewHolder> {
-    private ArrayList<DataWarteg> datalist;
+    private ArrayList<DataMenuOwner> datalist;
     private DetailWartegAdapter.ItemClickListener mClickListener;
     private Context context;
     private Activity parentActivity;
 
 
-    public DetailWartegAdapter(ArrayList<DataMenuOwner> listWarteg, Context mCtx,   Activity parentActivity) {
+    public DetailWartegAdapter(ArrayList<DataMenuOwner> datalist, Context mCtx,   Activity parentActivity) {
         this.datalist = datalist;
-        this.context = context;
+        this.context = mCtx;
         this.parentActivity = parentActivity;
     }
 
@@ -52,7 +52,7 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
     public void onBindViewHolder(@NonNull DetailWartegAdapter.WartegViewHolder holder, int position) {
         holder.menuName.setText(datalist.get(position).getName());
         Glide.with(context)
-                .load(datalist.get(position).getPhoto_profile())
+                .load(datalist.get(position).getPhoto())
                 .apply(new RequestOptions().override(200, 100))
                 .into(holder.imgMenu);
 

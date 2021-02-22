@@ -57,11 +57,10 @@ public class DetailWartegActivity extends AppCompatActivity {
         nameWarteg = getIntent().getStringExtra("name");
         descWarteg = getIntent().getStringExtra("description");
         recyclerView = findViewById(R.id.rv_best_menu);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
         initComponents();
         _setComponents();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         showDetailWarteg();
 
         btnFavorite.setOnClickListener(new View.OnClickListener() {
@@ -93,17 +92,28 @@ public class DetailWartegActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 try {
                                     JSONObject data = jsonArray.getJSONObject(i);
-                                    dataMenuOwner.add(new DataMenuOwner(data.getInt("id"), data.getString("code"), data.getString("name"), data.getInt("warteg_id"), data.getInt("price"), data.getBoolean("is_have_stock"), data.getString("created_at"), data.getString("updated_at"), data.getString("photo") , data.getString("description")));
+                                    Log.d("TAG", "data" + jsonArray.getJSONObject(i));
+                                    dataMenuOwner.add(new DataMenuOwner(data.getInt("id"),
+                                            data.getString("code"),
+                                            data.getString("name"),
+                                            data.getInt("warteg_id"),
+                                            data.getInt("price"),
+                                            data.getBoolean("is_have_stock"),
+                                            data.getString("created_at"),
+                                            data.getString("updated_at"),
+                                            data.getString("photo") ,
+                                            data.getString("description")));
                                     adapter = new DetailWartegAdapter(dataMenuOwner, getApplicationContext(), DetailWartegActivity.this);
                                     recyclerView.setAdapter(adapter);
+                                    recyclerView.setHasFixedSize(true);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    Log.e("TAGerr", "onResponse: ",e );
+                                    Log.e("TAGerr", "onResponse: ", e);
                                 }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.e("TAG", "onResponse: ",e );
+                            Log.e("TAG", "onResponse: ", e);
                         }
 
                     }
