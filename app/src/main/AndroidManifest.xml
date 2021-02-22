@@ -4,10 +4,6 @@
     package="com.cektrend.cekwarteg">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +24,7 @@
         <activity android:name=".DashboardActivity" >
 
         </activity>
-        <activity android:name=".Welcome" />
+        <activity android:name=".UserDashboardActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
