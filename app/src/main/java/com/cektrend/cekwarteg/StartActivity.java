@@ -50,7 +50,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             startActivity(login);
             finish();
         } else if (id == R.id.btn_started) {
-            Intent start = new Intent(StartActivity.this, Welcome.class);
+            Intent start = new Intent(StartActivity.this, UserDashboardActivity.class);
             startActivity(start);
             finish();
         }

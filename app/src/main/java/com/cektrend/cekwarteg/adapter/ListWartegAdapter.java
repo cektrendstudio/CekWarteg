@@ -14,18 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cektrend.cekwarteg.R;
+import com.cektrend.cekwarteg.data.DataMenuOwner;
 import com.cektrend.cekwarteg.model.DataWarteg;
 
 import java.util.ArrayList;
 
 public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.WartegViewHolder> {
-    ArrayList<DataWarteg> listWarteg;
-    private final Context mCtx;
-    private final Activity parentActivity;
+    private ArrayList<DataWarteg> datalist;
+    private DataMenuOwnerAdapter.ItemClickListener mClickListener;
+    private Context context;
+    private Activity parentActivity;
 
     public ListWartegAdapter(ArrayList<DataWarteg> listWarteg, Context mCtx, Activity parentActivity) {
-        this.listWarteg = listWarteg;
-        this.mCtx = mCtx;
+        this.datalist = listWarteg;
+        this.context = mCtx;
         this.parentActivity = parentActivity;
     }
 
@@ -38,39 +40,38 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
 
     @Override
     public void onBindViewHolder(@NonNull ListWartegAdapter.WartegViewHolder holder, int position) {
-        holder.bind(listWarteg.get(position));
+        holder.wartegName.setText(datalist.get(position).getName());
+        Glide.with(context)
+                .load(datalist.get(position).getPhoto_profile())
+                .apply(new RequestOptions().override(200, 100))
+                .into(holder.imgWarteg);
     }
 
     @Override
     public int getItemCount() {
-        return this.listWarteg.size();
+        return (datalist != null) ? datalist.size() : 0;
     }
 
     public class WartegViewHolder extends RecyclerView.ViewHolder {
-        TextView wartegName1, wartegName2;
-        ImageView imgWarteg1, imgWarteg2;
+        TextView wartegName;
+        ImageView imgWarteg;
 
         WartegViewHolder(@NonNull View itemView) {
             super(itemView);
-            wartegName1 = itemView.findViewById(R.id.warteg_name1);
-            wartegName2 = itemView.findViewById(R.id.warteg_name2);
-            imgWarteg1 = itemView.findViewById(R.id.img_warteg1);
-            imgWarteg2 = itemView.findViewById(R.id.img_warteg2);
+            wartegName = itemView.findViewById(R.id.warteg_name);
+            imgWarteg = itemView.findViewById(R.id.img_warteg);
         }
 
-        void bind(final DataWarteg dataWarteg) {
-            wartegName1.setText(dataWarteg.getName());
-            wartegName2.setText(dataWarteg.getName());
-            Glide.with(itemView.getContext())
-                    .load(dataWarteg.getPhoto_profile())
-                    .apply(new RequestOptions().override(50, 57))
-                    .into(imgWarteg1);
-            Glide.with(itemView.getContext())
-                    .load(dataWarteg.getPhoto_profile())
-                    .apply(new RequestOptions().override(50, 57))
-                    .into(imgWarteg2);
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
 
+    }
+    void setClickListener(DataMenuOwnerAdapter.ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 
 }

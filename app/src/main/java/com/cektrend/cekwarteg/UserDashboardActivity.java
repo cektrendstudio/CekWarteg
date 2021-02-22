@@ -8,13 +8,11 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.cektrend.cekwarteg.adapter.ListWartegAdapter;
 import com.cektrend.cekwarteg.model.DataWarteg;
@@ -25,7 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Welcome extends AppCompatActivity {
+public class UserDashboardActivity extends AppCompatActivity {
     EditText edtSearchMenu;
     ProgressDialog pDialog;
     ListWartegAdapter adapter;
@@ -35,10 +33,9 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_user_dashboard);
         initComponents();
         AndroidNetworking.initialize(getApplicationContext());
-        recyclerView = findViewById(R.id.rv_warteg);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         showWarteg();
 
@@ -46,7 +43,7 @@ public class Welcome extends AppCompatActivity {
 
     private void initComponents() {
         edtSearchMenu = findViewById(R.id.edt_search_menu);
-
+        recyclerView = findViewById(R.id.rv_warteg);
     }
 
     private void showWarteg() {
@@ -62,16 +59,29 @@ public class Welcome extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            JSONArray jsonArray = new JSONArray(response.getJSONObject("data"));
-                            for (int i = 0; i < jsonArray.length();
-                                 i++) {
+                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
+                            Log.d("TAG", "String " + response.getString("data"));
+                            JSONArray jsonArray = response.getJSONArray("data");
+//                            JSONObject jsonObject = new JSONObject(response.getJSONArray("data"));
+                            Log.e("TAG", "Lenght" + jsonArray.length());
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                Log.d("TAG", "jason" + jsonArray.get(i));
                                 JSONObject data = jsonArray.getJSONObject(i);
-                                dataWartegs.add(new DataWarteg(data.getString("code"), data.getString("name"), data.getString("email"), data.getString("owner_name"), data.getString("address"), data.getString("phone"), data.getString("description"), data.getString("photo_profile")));
+                                dataWartegs.add(new DataWarteg(data.getString("code"),
+                                        data.getString("name"),
+                                        data.getString("email"),
+                                        data.getString("owner_name"),
+                                        data.getString("address"),
+                                        data.getString("phone"),
+                                        data.getString("description"),
+                                        data.getString("photo_profile")));
                             }
-                            adapter = new ListWartegAdapter(dataWartegs, getApplicationContext(), Welcome.this);
+                            adapter = new ListWartegAdapter(dataWartegs, getApplicationContext(), UserDashboardActivity.this);
                             recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("TAG", "test ", e);
                         }
                     }
 
