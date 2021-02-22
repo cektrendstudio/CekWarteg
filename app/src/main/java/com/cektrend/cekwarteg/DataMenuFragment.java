@@ -81,7 +81,7 @@ public class DataMenuFragment extends Fragment {
                                 try {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     // Log.e("TAG", "Message : " + data.getString("name"));
-                                    DataMenuOwner.add(new DataMenuOwner(data.getInt("id"), data.getString("code"), data.getString("name"), data.getInt("warteg_id"), data.getInt("price"), data.getBoolean("is_have_stock"), data.getString("created_at"), data.getString("updated_at"), data.getString("photo")));
+                                    DataMenuOwner.add(new DataMenuOwner(data.getInt("id"), data.getString("code"), data.getString("name"), data.getInt("warteg_id"), data.getInt("price"), data.getBoolean("is_have_stock"), data.getString("created_at"), data.getString("updated_at"), data.getString("photo") , data.getString("description")));
                                     adapter = new DataMenuOwnerAdapter(DataMenuOwner, getContext(), getActivity());
                                     recyclerView.setAdapter(adapter);
                                 } catch (JSONException e) {
