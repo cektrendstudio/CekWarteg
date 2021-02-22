@@ -30,8 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.cektrend.cekwarteg.LoginActivity.MY_SHARED_PREFERENCES;
-import static com.cektrend.cekwarteg.LoginActivity.WARTEG_ID;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
+import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_ID;
 
 public class DataMenuFragment extends Fragment {
     ProgressDialog pDialog;
