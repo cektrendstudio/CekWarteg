@@ -16,10 +16,8 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,8 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 edtPassword.setError("Please insert your password");
             }
         } else if (id == R.id.btn_register) {
-            startActivity(new Intent(LoginActivity.this, RegisterAdmin.class));
-            finish();
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         }
     }
 
@@ -138,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             hideDialog();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         Toast.makeText(getApplicationContext(), anError.getErrorBody(), Toast.LENGTH_SHORT).show();
