@@ -23,7 +23,7 @@
         <activity android:name=".DetailMenuActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterAdmin" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".UserDashboardActivity" />
