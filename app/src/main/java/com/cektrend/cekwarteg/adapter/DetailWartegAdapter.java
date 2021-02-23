@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.cektrend.cekwarteg.DetailMenuActivity;
 import com.cektrend.cekwarteg.DetailWartegActivity;
 import com.cektrend.cekwarteg.R;
 import com.cektrend.cekwarteg.data.DataMenuOwner;
@@ -51,10 +52,24 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
 
     public void onBindViewHolder(@NonNull DetailWartegAdapter.WartegViewHolder holder, int position) {
         holder.menuName.setText(datalist.get(position).getName());
+        holder.description.setText(datalist.get(position).getDescription());
         Glide.with(context)
                 .load(datalist.get(position).getPhoto())
                 .apply(new RequestOptions().override(200, 100))
                 .into(holder.imgMenu);
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Warteg " + datalist.get(position).getName() + " Di Klik!", Toast.LENGTH_SHORT).show();
+                Intent detWarteg = new Intent(context, DetailMenuActivity.class);
+                detWarteg.putExtra("id", datalist.get(position).getId());
+                detWarteg.putExtra("photo_profile", datalist.get(position).getPhoto());
+                detWarteg.putExtra("name", datalist.get(position).getName());
+                detWarteg.putExtra("description", datalist.get(position).getDescription());
+                detWarteg.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(detWarteg);
+            }
+        });
 
     }
 
@@ -68,12 +83,15 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
         TextView menuName;
         ImageView imgMenu;
         TextView description;
+        ConstraintLayout layout;
 
         WartegViewHolder(@NonNull View itemView) {
             super(itemView);
             menuName = itemView.findViewById(R.id.title);
             imgMenu= itemView.findViewById(R.id.img_menu);
+
             description = itemView.findViewById(R.id.description);
+            layout = itemView.findViewById(R.id.cardView);
         }
 
         public void onClick(View view) {

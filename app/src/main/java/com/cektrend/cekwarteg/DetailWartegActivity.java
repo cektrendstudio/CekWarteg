@@ -85,9 +85,9 @@ public class DetailWartegActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            Log.e("TAGt", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
+                           // Log.e("TAGt", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
                             JSONArray jsonArray = new JSONArray(response.getJSONObject("data").getString("menu"));
-                            Log.e("TAGmenut", "menu : " +jsonArray);
+                            //Log.e("TAGmenut", "menu : " +jsonArray);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 try {

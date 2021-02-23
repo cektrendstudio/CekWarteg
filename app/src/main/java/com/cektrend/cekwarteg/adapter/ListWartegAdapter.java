@@ -59,7 +59,6 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
                 detWarteg.putExtra("description", datalist.get(position).getDescription());
                 detWarteg.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(detWarteg);
-                parentActivity.finish();
             }
         });
     }
