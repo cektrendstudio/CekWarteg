@@ -1,11 +1,10 @@
 package com.cektrend.cekwarteg;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_ID;
@@ -74,7 +74,7 @@ public class DataMenuFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            Log.e("TAG", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
+                            // Log.e("TAG", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
                             JSONArray jsonArray = new JSONArray(response.getJSONObject("data").getString("menu"));
                             // Log.e("TAG", "Data Menu : " + jsonArray.get(0));
                             for (int i = 0; i < jsonArray.length(); i++) {

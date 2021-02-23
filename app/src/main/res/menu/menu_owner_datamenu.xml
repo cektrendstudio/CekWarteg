@@ -7,7 +7,7 @@
             android:id="@+id/action_add_datamenu"
             android:icon="@drawable/ic_baseline_add_24"
             android:orderInCategory="100"
-            android:title="Tambah"
+            android:title="Tambah Data Menu"
             app:showAsAction="ifRoom" />
     </group>
 </menu>
