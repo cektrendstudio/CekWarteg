@@ -91,7 +91,7 @@ public class DetailMenuActivity extends AppCompatActivity {
         pDialog.setMessage("Verifikasi ...");
         showDialog();
         AndroidNetworking.post(BuildConfig.BASE_URL + "api/menu/{menu_id}/review")
-                .addBodyParameter("menu_id", menuId)
+                .addBodyParameter("menu_id", String.valueOf(menuId))
                 .addBodyParameter("name", name)
                 .addBodyParameter("review_text", review)
 //                .addBodyParameter("reviewText", ulas)
@@ -102,15 +102,15 @@ public class DetailMenuActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                            id = response.getJSONObject("data").getInt("id");
+//                            id = response.getJSONObject("data").getInt("id");
                             isSuccess = response.getBoolean("isSuccess");
                             message = response.getString(    "message");
-                            messages = response.getString("messages");
+//                            messages = response.getString("messages");
 
                             if (isSuccess) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getApplicationContext(), messages, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 hideDialog();
                             }
                         } catch (JSONException e) {
