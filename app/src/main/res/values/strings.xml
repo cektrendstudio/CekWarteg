@@ -12,4 +12,5 @@
     <string name="name_headline">Ready for looking perfect Warteg?</string>
     <string name="get_started">Get Started</string>
     <string name="log_in_to_warteg">Log in To Warteg</string>
+    <string name="snack_bar_undo">Item telah dihapus!</string>
 </resources>

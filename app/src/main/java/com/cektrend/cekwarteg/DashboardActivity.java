@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -16,18 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
@@ -40,9 +30,6 @@ import androidx.appcompat.widget.Toolbar;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.SESSION_STATUS;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_NAME;
-import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_PHOTO;
-
-import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -207,7 +194,7 @@ public class DashboardActivity extends AppCompatActivity {
             mDrawer.openDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.action_add_datamenu) {
-            Intent addMenu = new Intent(DashboardActivity.this, DataMenuActivity.class);
+            Intent addMenu = new Intent(DashboardActivity.this, AddMenuActivity.class);
             startActivity(addMenu);
             return true;
         }
