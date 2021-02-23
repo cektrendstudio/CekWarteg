@@ -42,7 +42,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        edtSearchMenu = findViewById(R.id.edt_search_menu);
+        edtSearchMenu = findViewById(R.id.edt_search);
         recyclerView = findViewById(R.id.rv_warteg);
     }
 

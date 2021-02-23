@@ -10,6 +10,7 @@ public class DataMenuOwner {
     private String created_at;
     private String updated_at;
     private String photo;
+    private String description;
 
     public String getPhoto() {
         return photo;
@@ -19,7 +20,7 @@ public class DataMenuOwner {
         this.photo = photo;
     }
 
-    public DataMenuOwner(Integer id, String code, String name, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at, String photo) {
+    public DataMenuOwner(Integer id, String code, String name, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at, String photo , String description) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -29,6 +30,14 @@ public class DataMenuOwner {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.photo = photo;
+        this.description = description;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getId() {
