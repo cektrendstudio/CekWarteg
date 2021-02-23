@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/logo_light" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_login"
         android:layout_width="300dp"
         android:layout_height="56dp"
         android:layout_marginBottom="20dp"
@@ -45,14 +45,14 @@
         android:textStyle="bold"
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btn_started"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeWidth="1dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_started"
         android:layout_width="300dp"
         android:layout_height="56dp"
         android:layout_marginBottom="34dp"
@@ -71,7 +71,7 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"

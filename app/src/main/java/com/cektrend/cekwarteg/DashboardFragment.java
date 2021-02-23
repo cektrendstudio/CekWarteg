@@ -1,51 +1,34 @@
 package com.cektrend.cekwarteg;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.cektrend.cekwarteg.R;
-
-import java.util.Objects;
-
 public class DashboardFragment extends Fragment {
+    RatingBar ratingFoodMenu;
+    TextView tvAmountRating, tvAmountViews, tvAmountFavorite, tvAmountVariant;
 
     @SuppressLint ("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        // final TextView textView = root.findViewById(R.id.text_home);
-        // Button btnResistor = root.findViewById(R.id.btnResistor);
-        // Button btnKapasitor = root.findViewById(R.id.btnKapasitor);
-        // Button btnListrik = root.findViewById(R.id.btnListrik);
-        // Button btnToko = root.findViewById(R.id.btnToko);
-        // Button btnMateri = root.findViewById(R.id.btnMateri);
-        // TextView tvNama = root.findViewById(R.id.text_home);
-
-        // final Intent actResistor = new Intent(getActivity(), ResistorActivity.class);
-        // final Intent actKapasitor = new Intent(getActivity(), KapasitorActivity.class);
-        // final Intent actListrik = new Intent(getActivity(), DasarListrikActivity.class);
-        // final Intent materiElektro = new Intent(getActivity(), MateriActivity.class);
-        // final String name = Objects.requireNonNull(Objects.requireNonNull(getActivity()).getIntent().getExtras()).getString("NAMA");
-        // tvNama.setText("Hello, " + name);
-
-
-        // btnResistor.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //     public void onClick(View view) {
-        //         startActivity(actResistor);
-        //     }
-        // });
+        initComponents(root);
 
         return root;
+    }
+
+    private void initComponents(View root) {
+        ratingFoodMenu = root.findViewById(R.id.rating_food_menu);
+        tvAmountRating = root.findViewById(R.id.tv_amount_rating);
+        tvAmountViews = root.findViewById(R.id.tv_amount_views);
+        tvAmountFavorite = root.findViewById(R.id.tv_amount_favorite);
+        tvAmountVariant = root.findViewById(R.id.tv_amount_variant);
     }
 }
