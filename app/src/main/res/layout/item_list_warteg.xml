@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/shape_rounded_main_card"
     android:elevation="10dp"
     android:padding="12dp">
