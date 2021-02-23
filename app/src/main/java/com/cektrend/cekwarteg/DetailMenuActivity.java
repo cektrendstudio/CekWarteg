@@ -82,35 +82,25 @@ public class DetailMenuActivity extends AppCompatActivity {
                 .addBodyParameter("review_text", ulas)
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+                .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         hideDialog();
-//                        try {
+                        try {
 
-//                            Log.d("TAG", "info" + response.getJSONArray(0));
+                            isSuccess = response.getBoolean("isSuccess");
+                            message = response.getString(    "message");
 
-//                            for (int i = 0; i < response.length(); i++) {
-//                                Log.d("TAG", "respon" + response);
-//                                JSONObject data = response.getJSONObject("data");
-//                                menuId = data.getInt("menu_id");
-//                                id = data.getInt("id");
-//                                name = data.getString("name");
-//                                review = data.getString("review_text");
-//                                isSuccess = response.getBoolean("isSuccess");
-//                                message = response.getString("message");
-//                            }
-//                            if (isSuccess) {
-//                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//
-//                            } else {
-//                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                                hideDialog();
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Log.e("TAG", "JSONE", e);
-//                        }
+                            if (isSuccess) {
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                hideDialog();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("TAG", "JSONE", e);
+                        }
                     }
 
                     @Override
