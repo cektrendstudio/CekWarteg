@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -149,6 +150,8 @@ public class DashboardActivity extends AppCompatActivity {
         try {
             fragment = (Fragment) fragmentClass.newInstance();
             FragmentManager fragmentManager = getSupportFragmentManager();
+            // Log.e("TAG", "Fragment " + fragment);
+            // Log.e("TAG", "Fragment Manager " + fragmentManager);
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         } catch (Exception e) {
             e.printStackTrace();

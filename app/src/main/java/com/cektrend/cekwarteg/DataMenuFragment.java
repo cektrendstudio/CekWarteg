@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -33,22 +34,25 @@ import java.util.List;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_ID;
 
-public class DataMenuFragment extends Fragment {
+public class DataMenuFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ProgressDialog pDialog;
     DataMenuOwnerAdapter adapter;
     ArrayList<DataMenuOwner> DataMenuOwner = new ArrayList<DataMenuOwner>();
     private RecyclerView recyclerView;
     private String wartegId;
     SharedPreferences sharedPreferences;
+    SwipeRefreshLayout swipeRefresh;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_data_menu, container, false);
+        swipeRefresh = root.findViewById(R.id.swipeRefresh);
         recyclerView = root.findViewById(R.id.rv_data_menu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         sharedPreferences = getActivity().getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         wartegId = sharedPreferences.getString(WARTEG_ID, null);
+        swipeRefresh.setOnRefreshListener(this);
         return root;
     }
 
@@ -81,7 +85,7 @@ public class DataMenuFragment extends Fragment {
                                 try {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     // Log.e("TAG", "Message : " + data.getString("name"));
-                                    DataMenuOwner.add(new DataMenuOwner(data.getInt("id"), data.getString("code"), data.getString("name"), data.getInt("warteg_id"), data.getInt("price"), data.getBoolean("is_have_stock"), data.getString("created_at"), data.getString("updated_at"), data.getString("photo") , data.getString("description")));
+                                    DataMenuOwner.add(new DataMenuOwner(data.getInt("id"), data.getString("code"), data.getString("name"), data.getInt("warteg_id"), data.getInt("price"), data.getBoolean("is_have_stock"), data.getString("created_at"), data.getString("updated_at"), data.getString("photo"), data.getString("description")));
                                     adapter = new DataMenuOwnerAdapter(DataMenuOwner, getContext(), getActivity());
                                     recyclerView.setAdapter(adapter);
                                 } catch (JSONException e) {
@@ -96,9 +100,7 @@ public class DataMenuFragment extends Fragment {
 
                     @Override
                     public void onError(ANError error) {
-                        //    Handle error
                         Toast.makeText(getContext(), "Gagal memuat, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
-                        //    memunculkan Toast saat data gagal ditampilkan
                         hideDialog();
                     }
                 });
@@ -110,5 +112,14 @@ public class DataMenuFragment extends Fragment {
 
     private void hideDialog() {
         if (pDialog.isShowing()) pDialog.dismiss();
+        if (swipeRefresh.isRefreshing()) {
+            DataMenuOwner.clear();
+            swipeRefresh.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        tampilDataMenu();
     }
 }

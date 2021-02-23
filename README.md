@@ -1,2 +1,2 @@
 # CekWarteg  
-<h1> Aplikasi pencarian dataMenuWartegOwners warteg terbaik!! </1>
+<h1> Aplikasi pencarian menu warteg terbaik!! </1>

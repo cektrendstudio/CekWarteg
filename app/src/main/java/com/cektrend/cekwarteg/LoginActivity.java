@@ -99,8 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(JSONObject response) {
                         hideDialog();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
+                        try {
+                            isSuccess = response.getBoolean("isSuccess");
+                            if (isSuccess) {
                                 JSONObject data = response.getJSONObject("user");
                                 userName = data.getString("username");
                                 is_approve = data.getBoolean("is_approve");
@@ -108,38 +109,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 wartegName = data.getString("name");
                                 wartegPhoto = data.getString("photo_profile");
                                 myToken = response.getString("access_token");
-                                isSuccess = response.getBoolean("isSuccess");
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean(SESSION_STATUS, true);
+                                editor.putString(SESSION_USERNAME, userName);
+                                editor.putString(WARTEG_ID, String.valueOf(id));
+                                editor.putString(WARTEG_NAME, wartegName);
+                                editor.putString(WARTEG_PHOTO, wartegPhoto);
+                                editor.putString(TOKEN, myToken);
+                                editor.apply();
+                                Intent login = new Intent(LoginActivity.this, DashboardActivity.class);
+                                startActivity(login);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_SHORT).show();
+                                edtPassword.setText("");
+                                edtUsername.setText("");
+                                hideDialog();
                             }
-                        }
-
-                        if (isSuccess) {
-                            Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_SHORT).show();
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(SESSION_STATUS, true);
-                            editor.putString(SESSION_USERNAME, userName);
-                            editor.putString(WARTEG_ID, String.valueOf(id));
-                            editor.putString(WARTEG_NAME, wartegName);
-                            editor.putString(WARTEG_PHOTO, wartegPhoto);
-                            editor.putString(TOKEN, myToken);
-                            editor.apply();
-                            Intent login = new Intent(LoginActivity.this, DashboardActivity.class);
-                            startActivity(login);
-                            finish();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_SHORT).show();
-                            edtPassword.setText("");
-                            edtUsername.setText("");
-                            hideDialog();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         Toast.makeText(getApplicationContext(), anError.getErrorBody(), Toast.LENGTH_SHORT).show();
-                        Log.e("Error", "bagian ieu :", anError);
                         hideDialog();
                     }
                 });
