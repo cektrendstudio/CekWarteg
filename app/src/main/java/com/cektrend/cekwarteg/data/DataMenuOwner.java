@@ -4,6 +4,7 @@ public class DataMenuOwner {
     private Integer id;
     private String code;
     private String name;
+    private String description;
     private Integer warteg_id;
     private Integer price;
     private Boolean is_have_stock;
@@ -19,10 +20,11 @@ public class DataMenuOwner {
         this.photo = photo;
     }
 
-    public DataMenuOwner(Integer id, String code, String name, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at, String photo) {
+    public DataMenuOwner(Integer id, String code, String name, String description, Integer warteg_id, Integer price, Boolean is_have_stock, String created_at, String updated_at, String photo) {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.description = description;
         this.warteg_id = warteg_id;
         this.price = price;
         this.is_have_stock = is_have_stock;
@@ -53,6 +55,14 @@ public class DataMenuOwner {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getWarteg_id() {

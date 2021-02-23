@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.TOKEN;
 
-public class DataMenuActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddMenuActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tvMenuEvent;
     EditText edtMenuName, edtMenuDesc, edtMenuPrice;
     Button btnChooseImg, btnAddMenu;
@@ -58,6 +58,7 @@ public class DataMenuActivity extends AppCompatActivity implements View.OnClickL
         myToken = sharedPreferences.getString(TOKEN, null);
         toolbar = findViewById(R.id.toolbar_add_datamenu);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Tambah Data Menu");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

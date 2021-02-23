@@ -1,8 +1,13 @@
 package com.cektrend.cekwarteg.adapter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +18,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -24,17 +34,29 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.cektrend.cekwarteg.DataMenuFragment;
+import com.cektrend.cekwarteg.BuildConfig;
+import com.cektrend.cekwarteg.DetailMenuOwnerActivity;
 import com.cektrend.cekwarteg.R;
 import com.cektrend.cekwarteg.data.DataMenuOwner;
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.cektrend.cekwarteg.utils.ConstantUtil.*;
 
 public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdapter.ViewHolder> {
     private ArrayList<DataMenuOwner> datalist;
     private ItemClickListener mClickListener;
     private Context context;
     private Activity parentActivity;
+    String myToken, messageResponse;
+    Boolean isSuccess;
+    SharedPreferences sharedPreferences;
+    ProgressDialog pDialog;
 
     public DataMenuOwnerAdapter(ArrayList<DataMenuOwner> datalist, Context context, Activity parentActivity) {
         this.datalist = datalist;
@@ -48,6 +70,36 @@ public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdap
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_row_data_menu, parent, false);
         return new ViewHolder(view);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private SwipeRevealLayout swipeLayout;
+        private View deleteLayout;
+        TextView tvMenuName, tvMenuDesc;
+        ImageView imgPhotoMenu;
+        ProgressBar progressBar;
+        ConstraintLayout layout;
+        private final Context context;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+
+            context = itemView.getContext();
+            tvMenuName = itemView.findViewById(R.id.tv_menu_name);
+            tvMenuDesc = itemView.findViewById(R.id.tv_menu_desc);
+            imgPhotoMenu = itemView.findViewById(R.id.img_data_menu);
+            progressBar = itemView.findViewById(R.id.loading_img);
+            layout = itemView.findViewById(R.id.layout);
+            swipeLayout = itemView.findViewById(R.id.swipe_layout);
+            deleteLayout = itemView.findViewById(R.id.delete_layout);
+            sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+            myToken = sharedPreferences.getString(TOKEN, null);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        }
     }
 
     @Override
@@ -71,40 +123,68 @@ public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdap
                 .centerCrop()
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(holder.imgPhotoMenu);
+        holder.tvMenuDesc.setText(datalist.get(position).getDescription());
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Menu " + datalist.get(position).getName() + " Di Klik!", Toast.LENGTH_SHORT).show();
+                Intent detailMenu = new Intent(context, DetailMenuOwnerActivity.class);
+                detailMenu.putExtra(MENU_ID, String.valueOf(datalist.get(position).getId()));
+                detailMenu.putExtra(MENU_NAME, datalist.get(position).getName());
+                detailMenu.putExtra(MENU_DESC, datalist.get(position).getDescription());
+                detailMenu.putExtra(MENU_PHOTO, datalist.get(position).getPhoto());
+                detailMenu.putExtra(MENU_PRICE, String.valueOf(datalist.get(position).getPrice()));
+                context.startActivity(detailMenu);
             }
         });
+        holder.deleteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hapusdata(position, String.valueOf(datalist.get(position).getId()));
+            }
+        });
+    }
+
+    private void hapusdata(final int position, String idMenu) {
+        pDialog = new ProgressDialog(context);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Verifikasi ...");
+
+        showDialog();
+        AndroidNetworking.post(BuildConfig.BASE_URL + "api/menu/{idMenu}/delete")
+                .addHeaders("Authorization", myToken)
+                .addPathParameter("idMenu", String.valueOf(idMenu))
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            isSuccess = response.getBoolean("isSuccess");
+                            messageResponse = response.getString("messages");
+                            if (isSuccess) {
+                                datalist.remove(position);
+                                notifyItemRemoved(position);
+                                Toast.makeText(context, messageResponse, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, messageResponse, Toast.LENGTH_SHORT).show();
+                            }
+                            hideDialog();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        Toast.makeText(context, error.getErrorBody(), Toast.LENGTH_SHORT).show();
+                        hideDialog();
+                    }
+                });
     }
 
     @Override
     public int getItemCount() {
         return (datalist != null) ? datalist.size() : 0;
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvMenuName;
-        ImageView imgPhotoMenu;
-        ProgressBar progressBar;
-        ConstraintLayout layout;
-        private final Context context;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-
-            context = itemView.getContext();
-            tvMenuName = itemView.findViewById(R.id.tv_menu_name);
-            imgPhotoMenu = itemView.findViewById(R.id.img_data_menu);
-            progressBar = itemView.findViewById(R.id.loading_img);
-            layout = itemView.findViewById(R.id.layout);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
     }
 
     String getItem(int id) {
@@ -113,6 +193,14 @@ public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdap
 
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing()) pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing()) pDialog.dismiss();
     }
 
     public interface ItemClickListener {
