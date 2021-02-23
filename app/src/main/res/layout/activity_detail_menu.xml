@@ -103,6 +103,8 @@
         android:inputType="textMultiLine"
         android:gravity="left|top"
         android:lines="8"
+        android:maxLines="10"
+        android:minLines="1"
         android:hint="Masukan Ulasan"
         android:padding="15dp"
         android:textColor="@color/black"
