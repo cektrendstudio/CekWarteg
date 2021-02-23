@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/img_menu"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="#B7B7B7"
             android:src="@drawable/ic_launcher_foreground"
