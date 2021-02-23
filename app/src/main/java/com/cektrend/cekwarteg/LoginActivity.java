@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                     @Override
                     public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal terhubung, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), anError.getErrorBody(), Toast.LENGTH_SHORT).show();
                         Log.e("Error", "bagian ieu :", anError);
                         hideDialog();
                     }

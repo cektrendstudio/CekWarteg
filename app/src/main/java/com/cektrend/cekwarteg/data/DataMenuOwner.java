@@ -4,13 +4,13 @@ public class DataMenuOwner {
     private Integer id;
     private String code;
     private String name;
+    private String description;
     private Integer warteg_id;
     private Integer price;
     private Boolean is_have_stock;
     private String created_at;
     private String updated_at;
     private String photo;
-    private String description;
 
     public String getPhoto() {
         return photo;
