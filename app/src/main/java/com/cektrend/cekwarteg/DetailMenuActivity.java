@@ -21,6 +21,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.bumptech.glide.Glide;
 import com.cektrend.cekwarteg.adapter.UlasanAdapter;
 import com.cektrend.cekwarteg.data.DataUlasan;
 
@@ -92,6 +93,12 @@ public class DetailMenuActivity extends AppCompatActivity {
     private void _setComponents() {
         tvMenuName.setText(menuName);
         tvMenuDesc.setText(menuDesc);
+        Glide.with(this)
+                .load(menuImg) // image url
+                .placeholder(R.drawable.ic_baseline_image_not_supported_24) // any placeholder to load at start
+                .error(R.drawable.ic_baseline_image_not_supported_24)
+                .centerCrop()
+                .into(imgMenu);
     }
 
     private void setRefreshLayout() {

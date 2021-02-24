@@ -93,7 +93,7 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
             imgMenu= itemView.findViewById(R.id.img_menu);
 
             description = itemView.findViewById(R.id.description);
-            layout = itemView.findViewById(R.id.cardView);
+            layout = itemView.findViewById(R.id.layout);
         }
 
         public void onClick(View view) {
