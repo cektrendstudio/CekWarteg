@@ -50,7 +50,7 @@
         android:autofillHints="Deskripsi dataMenuWartegOwners..."
         android:background="@drawable/button"
         android:gravity="top|left"
-        android:hint="Deskripsi dataMenuWartegOwners..."
+        android:hint="Deskripsi..."
         android:inputType="textMultiLine"
         android:lines="10"
         android:maxLines="15"

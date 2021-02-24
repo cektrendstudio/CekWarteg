@@ -73,7 +73,6 @@ public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private SwipeRevealLayout swipeLayout;
         private View deleteLayout;
         TextView tvMenuName, tvMenuDesc;
         ImageView imgPhotoMenu;
@@ -90,7 +89,6 @@ public class DataMenuOwnerAdapter extends RecyclerView.Adapter<DataMenuOwnerAdap
             imgPhotoMenu = itemView.findViewById(R.id.img_data_menu);
             progressBar = itemView.findViewById(R.id.loading_img);
             layout = itemView.findViewById(R.id.layout);
-            swipeLayout = itemView.findViewById(R.id.swipe_layout);
             deleteLayout = itemView.findViewById(R.id.delete_layout);
             sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
             myToken = sharedPreferences.getString(TOKEN, null);
