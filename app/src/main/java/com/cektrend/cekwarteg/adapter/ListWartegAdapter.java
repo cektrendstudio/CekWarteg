@@ -91,5 +91,10 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+    public void setFilter(ArrayList<DataWarteg> filterList) {
+        datalist = new ArrayList<>();
+        datalist.addAll(filterList);
+        notifyDataSetChanged();
+    }
 
 }

@@ -8,7 +8,9 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.SearchView;
+
+import androidx.appcompat.widget.SearchView;
+
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -40,11 +42,33 @@ public class UserDashboardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         showWarteg();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<DataWarteg> dataFilter = new ArrayList<>();
+                for (DataWarteg data : dataWartegs) {
+                    String warteg = data.getName().toLowerCase();
+                    if (warteg.contains(newText)) {
+                        dataFilter.add(data);
+                    }
+                }
+                if (adapter != null) {
+                    adapter.setFilter(dataFilter);
+                }
+                return true;
+            }
+        });
+
     }
 
     private void initComponents() {
-//        searchView = findViewById(R.id.sv_search);
         recyclerView = findViewById(R.id.rv_warteg);
+        searchView = findViewById(R.id.searchView);
     }
 
     private void showWarteg() {
