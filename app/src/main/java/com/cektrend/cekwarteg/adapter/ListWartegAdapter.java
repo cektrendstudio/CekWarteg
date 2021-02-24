@@ -44,6 +44,7 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
     @Override
     public void onBindViewHolder(@NonNull ListWartegAdapter.WartegViewHolder holder, int position) {
         holder.wartegName.setText(datalist.get(position).getName());
+        holder.wartegDesc.setText(datalist.get(position).getDescription());
         Glide.with(context)
                 .load(datalist.get(position).getPhoto_profile())
                 .apply(new RequestOptions().override(200, 100))
@@ -69,7 +70,7 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
     }
 
     public class WartegViewHolder extends RecyclerView.ViewHolder {
-        TextView wartegName;
+        TextView wartegName, wartegDesc;
         ImageView imgWarteg;
         ConstraintLayout layout;
 
@@ -77,6 +78,7 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
             super(itemView);
             wartegName = itemView.findViewById(R.id.warteg_name);
             imgWarteg = itemView.findViewById(R.id.img_warteg);
+            wartegDesc = itemView.findViewById(R.id.tv_desc);
             layout = itemView.findViewById(R.id.layout);
         }
 
@@ -90,6 +92,11 @@ public class ListWartegAdapter extends RecyclerView.Adapter<ListWartegAdapter.Wa
     }
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+    public void setFilter(ArrayList<DataWarteg> filterList) {
+        datalist = new ArrayList<>();
+        datalist.addAll(filterList);
+        notifyDataSetChanged();
     }
 
 }
