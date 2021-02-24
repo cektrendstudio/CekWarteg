@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_rounded_main_card"
+    android:elevation="10dp"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/img_user"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:transitionName="image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_baseline_person_pin_24" />
+
+    <TextView
+        android:id="@+id/tv_reviewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Mamah Kumamah"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toEndOf="@+id/img_user"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_ulasan"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:justificationMode="inter_word"
+        android:text="Lorem ipsum dolor sit amet"
+        android:textColor="#313131"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintStart_toStartOf="@+id/tv_created"
+        app:layout_constraintTop_toBottomOf="@+id/tv_created"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/tv_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Create at : 23 Februari 2021"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_reviewer"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reviewer" />
+</androidx.constraintlayout.widget.ConstraintLayout>

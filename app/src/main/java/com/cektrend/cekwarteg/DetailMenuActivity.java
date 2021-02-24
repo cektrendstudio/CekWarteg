@@ -2,6 +2,7 @@ package com.cektrend.cekwarteg;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -41,6 +43,7 @@ public class DetailMenuActivity extends AppCompatActivity {
     UlasanAdapter adapter;
     ArrayList<DataUlasan> dataUlasans = new ArrayList<>();
     private RecyclerView recyclerView;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +60,15 @@ public class DetailMenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.d("TAG", "id" + menuId);
         showData();
+        setRefreshLayout();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               String name = edtReviewerName.getText().toString().trim();
-               String review = edtUlasan.getText().toString().trim();
+                String name = edtReviewerName.getText().toString().trim();
+                String review = edtUlasan.getText().toString().trim();
                 if (!name.isEmpty() || !review.isEmpty()) {
                     saveData(name, review);
-                    adapter.notifyDataSetChanged();
-                    showData();
                 } else {
                     edtReviewerName.setError("Please insert your Name");
                     edtUlasan.setError("Please insert your review");
@@ -84,13 +86,32 @@ public class DetailMenuActivity extends AppCompatActivity {
         edtUlasan = findViewById(R.id.edt_ulasan);
         btnSubmit = findViewById(R.id.btn_submit);
         recyclerView = findViewById(R.id.rv_ulasan);
+        refreshLayout = findViewById(R.id.swipe_refresh);
     }
-    private  void _setComponents(){
+
+    private void _setComponents() {
         tvMenuName.setText(menuName);
         tvMenuDesc.setText(menuDesc);
     }
 
-    private void saveData(String name, String review){
+    private void setRefreshLayout() {
+        refreshLayout.setColorSchemeResources(android.R.color.holo_green_dark, android.R.color.holo_blue_dark, android.R.color.holo_orange_dark);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+                dataUlasans.clear();
+                showData();
+            }
+        });
+    }
+
+    private void saveData(String name, String review) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Verifikasi ...");
@@ -108,10 +129,11 @@ public class DetailMenuActivity extends AppCompatActivity {
                         hideDialog();
                         try {
                             isSuccess = response.getBoolean("isSuccess");
-                            message = response.getString(    "message");
+                            message = response.getString("message");
                             if (isSuccess) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
+                                edtReviewerName.setText("");
+                                edtUlasan.setText("");
                             } else {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 hideDialog();
@@ -131,7 +153,7 @@ public class DetailMenuActivity extends AppCompatActivity {
                 });
     }
 
-    private void showData(){
+    private void showData() {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Memuat ...");
@@ -155,8 +177,8 @@ public class DetailMenuActivity extends AppCompatActivity {
                                 JSONObject data = jsonArray.getJSONObject(i);
 //                                Log.d("TAG", "jason" + data);
                                 dataUlasans.add(new DataUlasan(data.getString("name"),
-                                        data.getString("review_text")));
-//                                        data.getString("created_at")));
+                                        data.getString("review_text"),
+                                        data.getString("created_at")));
                             }
                             adapter = new UlasanAdapter(dataUlasans, getApplicationContext(), DetailMenuActivity.this);
                             recyclerView.setAdapter(adapter);
