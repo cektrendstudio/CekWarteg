@@ -33,15 +33,12 @@ import java.util.ArrayList;
 public class DetailWartegActivity extends AppCompatActivity {
     ImageView imgWarteg;
     TextView tvWartegName, tvWartegDesc;
-    Button btnFavorite;
     DetailWartegAdapter adapter;
     ArrayList<DataMenuOwner> dataMenuOwner = new ArrayList<DataMenuOwner>();
     ProgressDialog pDialog;
     RatingBar ratingWarteg;
     private RecyclerView recyclerView;
 
-    SharedPreferences sharedPreferences = null;
-    Boolean is_approve = false;
     private String wartegId;
     private String descWarteg;
     private String nameWarteg;
@@ -63,12 +60,6 @@ public class DetailWartegActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         showDetailWarteg();
 
-        btnFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //    Event Favorite
-            }
-        });
     }
 
     private void showDetailWarteg(){
@@ -134,7 +125,6 @@ public class DetailWartegActivity extends AppCompatActivity {
         imgWarteg = findViewById(R.id.img_warteg);
         tvWartegName = findViewById(R.id.tv_warteg_name);
         tvWartegDesc = findViewById(R.id.tv_warteg_desc);
-        btnFavorite = findViewById(R.id.btn_favorite);
         ratingWarteg = findViewById(R.id.rating_warteg);
     }
 
