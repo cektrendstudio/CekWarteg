@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class UserDashboardActivity extends AppCompatActivity {
-    EditText edtSearch;
+    SearchView searchView;
     ProgressDialog pDialog;
     ListWartegAdapter adapter;
     ArrayList<DataWarteg> dataWartegs = new ArrayList<>();
@@ -42,7 +43,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        edtSearch = findViewById(R.id.edt_search);
+//        searchView = findViewById(R.id.sv_search);
         recyclerView = findViewById(R.id.rv_warteg);
     }
 
