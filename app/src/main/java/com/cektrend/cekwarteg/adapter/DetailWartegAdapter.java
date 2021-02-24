@@ -3,6 +3,7 @@ package com.cektrend.cekwarteg.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,8 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
             public void onClick(View view) {
                 Toast.makeText(context, "Warteg " + datalist.get(position).getName() + " Di Klik!", Toast.LENGTH_SHORT).show();
                 Intent detWarteg = new Intent(context, DetailMenuActivity.class);
-                detWarteg.putExtra("id", datalist.get(position).getId());
+                detWarteg.putExtra("id", String.valueOf(datalist.get(position).getId()));
+                Log.d("TAG", "menuid : " + datalist.get(position).getId());
                 detWarteg.putExtra("photo_profile", datalist.get(position).getPhoto());
                 detWarteg.putExtra("name", datalist.get(position).getName());
                 detWarteg.putExtra("description", datalist.get(position).getDescription());

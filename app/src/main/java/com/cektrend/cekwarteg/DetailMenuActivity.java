@@ -1,10 +1,8 @@
 package com.cektrend.cekwarteg;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,15 +12,23 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.cektrend.cekwarteg.adapter.UlasanAdapter;
+import com.cektrend.cekwarteg.data.DataUlasan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DetailMenuActivity extends AppCompatActivity {
     ImageView imgMenu;
@@ -31,28 +37,38 @@ public class DetailMenuActivity extends AppCompatActivity {
     EditText edtReviewerName, edtUlasan;
     Button btnSubmit;
     ProgressDialog pDialog;
-    Integer idMenu;
     Boolean isSuccess = false;
-    Integer menuId, id;
-    String name, review, message;
+
+    String menuName, menuDesc, menuImg, menuId, message;
+    UlasanAdapter adapter;
+    ArrayList<DataUlasan> dataUlasans = new ArrayList<>();
+    private RecyclerView recyclerView;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_menu);
-        idMenu = 1;
+        menuId = getIntent().getStringExtra("id");
+        menuName = getIntent().getStringExtra("name");
+        menuDesc = getIntent().getStringExtra("description");
+        menuImg = getIntent().getStringExtra("photo_profile");
 
         initComponents();
-
-//        ratingMenu.setRating((float) 4.5);
+        _setComponents();
+        AndroidNetworking.initialize(getApplicationContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.d("TAG", "id" + menuId);
+        showData();
+        setRefreshLayout();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               String nama = edtReviewerName.getText().toString();
-               String ulas = edtUlasan.getText().toString();
-                if (!nama.isEmpty() || !ulas.isEmpty()) {
-                    saveData(nama, ulas);
+                String name = edtReviewerName.getText().toString().trim();
+                String review = edtUlasan.getText().toString().trim();
+                if (!name.isEmpty() || !review.isEmpty()) {
+                    saveData(name, review);
                 } else {
                     edtReviewerName.setError("Please insert your Name");
                     edtUlasan.setError("Please insert your review");
@@ -69,17 +85,42 @@ public class DetailMenuActivity extends AppCompatActivity {
         edtReviewerName = findViewById(R.id.edt_reviewer_name);
         edtUlasan = findViewById(R.id.edt_ulasan);
         btnSubmit = findViewById(R.id.btn_submit);
+        recyclerView = findViewById(R.id.rv_ulasan);
+        refreshLayout = findViewById(R.id.swipe_refresh);
     }
 
-    private void saveData(String nama, String ulas){
+    private void _setComponents() {
+        tvMenuName.setText(menuName);
+        tvMenuDesc.setText(menuDesc);
+    }
+
+    private void setRefreshLayout() {
+        refreshLayout.setColorSchemeResources(android.R.color.holo_green_dark, android.R.color.holo_blue_dark, android.R.color.holo_orange_dark);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+                dataUlasans.clear();
+                showData();
+            }
+        });
+    }
+
+    private void saveData(String name, String review) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Verifikasi ...");
         showDialog();
         AndroidNetworking.post(BuildConfig.BASE_URL + "api/menu/{menu_id}/review")
-                .addBodyParameter("menu_id", String.valueOf(1))
-                .addBodyParameter("name", nama)
-                .addBodyParameter("review_text", ulas)
+                .addPathParameter("menu_id", menuId)
+                .addBodyParameter("name", name)
+                .addBodyParameter("reviewText", review)
+//                .addBodyParameter("reviewText", ulas)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -87,12 +128,12 @@ public class DetailMenuActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-
                             isSuccess = response.getBoolean("isSuccess");
-                            message = response.getString(    "message");
-
+                            message = response.getString("message");
                             if (isSuccess) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                edtReviewerName.setText("");
+                                edtUlasan.setText("");
                             } else {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 hideDialog();
@@ -107,6 +148,51 @@ public class DetailMenuActivity extends AppCompatActivity {
                     public void onError(ANError error) {
                         Toast.makeText(getApplicationContext(), "Gagal terhubung, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
                         Log.e("TAG", "AnError" + error.getErrorBody());
+                        hideDialog();
+                    }
+                });
+    }
+
+    private void showData() {
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Memuat ...");
+        showDialog();
+        AndroidNetworking.get(BuildConfig.BASE_URL + "api/menu/{id}")
+                .addPathParameter("id", menuId)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        hideDialog();
+                        try {
+//                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
+//                            Log.d("TAG", "String " + response.getString("data"));
+                            JSONObject jsonObject = response.getJSONObject("data");
+                            JSONArray jsonArray = jsonObject.getJSONArray("review");
+//                            Log.d("TAG", "Lenght" + jsonArray.length());
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                Log.d("TAG", "jason" + jsonArray.get(i));
+                                JSONObject data = jsonArray.getJSONObject(i);
+//                                Log.d("TAG", "jason" + data);
+                                dataUlasans.add(new DataUlasan(data.getString("name"),
+                                        data.getString("review_text"),
+                                        data.getString("created_at")));
+                            }
+                            adapter = new UlasanAdapter(dataUlasans, getApplicationContext(), DetailMenuActivity.this);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("TAG", "test ", e);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        Toast.makeText(getApplicationContext(), "Gagal memuat, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
+                        Log.e("TAG", "Pesan", error);
                         hideDialog();
                     }
                 });
