@@ -1,21 +1,28 @@
 package com.cektrend.cekwarteg;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MENU_DESC;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MENU_ID;
@@ -28,6 +35,7 @@ public class DetailMenuOwnerActivity extends AppCompatActivity implements View.O
     TextView tvMenuName, tvMenuDesc;
     ImageView imgMenu;
     String menuName, menuDesc, menuPhoto, menuPrice, menuId;
+    ProgressBar progressBar;
     private Toolbar toolbar;
 
     @Override
@@ -44,6 +52,7 @@ public class DetailMenuOwnerActivity extends AppCompatActivity implements View.O
         tvMenuName = findViewById(R.id.tv_menu_name);
         tvMenuDesc = findViewById(R.id.tv_menu_desc);
         imgMenu = findViewById(R.id.img_menu);
+        progressBar = findViewById(R.id.loading_img);
         menuId = getIntent().getStringExtra(MENU_ID);
         menuName = getIntent().getStringExtra(MENU_NAME);
         menuDesc = getIntent().getStringExtra(MENU_DESC);
@@ -60,6 +69,19 @@ public class DetailMenuOwnerActivity extends AppCompatActivity implements View.O
         tvMenuDesc.setText(menuDesc);
         Glide.with(DetailMenuOwnerActivity.this)
                 .load(menuPhoto)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
                 .error(R.drawable.ic_baseline_image_not_supported_24).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))

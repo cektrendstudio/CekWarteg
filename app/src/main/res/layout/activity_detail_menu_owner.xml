@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ProgressBar
+        android:id="@+id/loading_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_menu"
+        app:layout_constraintEnd_toEndOf="@+id/img_menu"
+        app:layout_constraintStart_toStartOf="@+id/img_menu"
+        app:layout_constraintTop_toTopOf="@+id/img_menu" />
+
     <ImageView
         android:id="@+id/img_menu"
         android:layout_width="match_parent"
