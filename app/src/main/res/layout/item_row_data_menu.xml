@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:background="@android:color/holo_red_dark"
                 android:gravity="center"
-                android:text="Delete"
+                android:text="@string/title_delete"
                 android:textColor="@android:color/white" />
 
             <ImageView
@@ -36,7 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_delete_36" />
+                android:src="@drawable/ic_baseline_delete_36"
+                android:contentDescription="@string/app_name" />
         </LinearLayout>
     </FrameLayout>
 
@@ -79,10 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginStart="15dp"
-                android:layout_toRightOf="@id/img_data_menu"
-                android:text="Tumis Kangkung"
+                android:text="@string/ex_menu"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -97,7 +96,8 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/draw_love"
                 app:layout_constraintLeft_toRightOf="@id/img_data_menu"
-                app:layout_constraintTop_toBottomOf="@id/tv_menu_name" />
+                app:layout_constraintTop_toBottomOf="@id/tv_menu_name"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/tv_menu_desc"
@@ -106,7 +106,7 @@
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:justificationMode="inter_word"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  .."
+                android:text="@string/lorem_ipsum"
                 android:textColor="#313131"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,8 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.cektrend.cekwarteg.BuildConfig;
+import com.cektrend.cekwarteg.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

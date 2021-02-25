@@ -3,13 +3,13 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-            android:title="Dashboard"/>
+            android:title="Dashboard" />
         <item
             android:id="@+id/nav_data_menu"
-            android:title="Data Menu"/>
-        <item
-            android:id="@+id/nav_ulasan"
-            android:title="Review" />
+            android:title="Data Menu" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_ulasan"-->
+        <!--            android:title="Review" />-->
         <item
             android:id="@+id/nav_profile"
             android:title="Edit Profile" />

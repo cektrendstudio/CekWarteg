@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,21 +17,21 @@
         android:theme="@style/Theme.CekWarteg"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name=".EditMenuActivity"></activity>
-        <activity android:name=".DetailMenuOwnerActivity" />
-        <activity android:name=".DetailWartegActivity" />
-        <activity android:name=".AddMenuActivity" />
-        <activity android:name=".DetailMenuActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".DashboardActivity"></activity>
-        <activity android:name=".UserDashboardActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".activity.EditMenuActivity" />
+        <activity android:name=".activity.DetailMenuOwnerActivity" />
+        <activity android:name=".activity.DetailWartegActivity" />
+        <activity android:name=".activity.AddMenuActivity" />
+        <activity android:name=".activity.DetailMenuActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.DashboardActivity" />
+        <activity android:name=".activity.UserDashboardActivity" />
+        <activity android:name=".activity.StartActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

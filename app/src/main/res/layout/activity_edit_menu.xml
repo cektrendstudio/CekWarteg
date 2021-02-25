@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditMenuActivity">
+    tools:context=".activity.EditMenuActivity">
 
     <include
         android:id="@+id/toolbar_edit_datamenu"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="Edit Menu"
+                android:text="@string/edit_menu"
                 android:textColor="@color/black"
                 android:textSize="36sp"
                 android:textStyle="bold" />
@@ -42,7 +42,7 @@
                 android:layout_marginTop="20dp"
                 android:autofillHints="Nama Menu.."
                 android:background="@drawable/button"
-                android:hint="Nama Menu"
+                android:hint="@string/menu_name"
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="@color/black"
@@ -55,10 +55,10 @@
                 android:layout_height="150dp"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
-                android:autofillHints="Deskripsi dataMenuWartegOwners..."
+                android:autofillHints="@string/menu_desc"
                 android:background="@drawable/button"
-                android:gravity="top|left"
-                android:hint="Deskripsi..."
+                android:gravity="start"
+                android:hint="@string/menu_desc"
                 android:inputType="textMultiLine"
                 android:lines="10"
                 android:maxLines="15"
@@ -75,7 +75,7 @@
                 android:layout_marginTop="20dp"
                 android:autofillHints="Harga.."
                 android:background="@drawable/button"
-                android:hint="Harga..."
+                android:hint="@string/menu_price"
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColor="@color/black"
@@ -88,7 +88,7 @@
                 android:layout_height="56dp"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="25dp"
-                android:text="Choose Image"
+                android:text="@string/choose_image"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -108,7 +108,8 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rounded_main_card"
-                android:src="@drawable/ic_baseline_image_50" />
+                android:src="@drawable/ic_baseline_image_50"
+                android:contentDescription="@string/app_name" />
 
             <Button
                 android:id="@+id/btn_edit_menu"
@@ -118,7 +119,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="25dp"
                 android:background="@drawable/button"
-                android:text="Simpan Perubahan"
+                android:text="@string/title_btn_save"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="18sp"

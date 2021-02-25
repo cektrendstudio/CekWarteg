@@ -46,6 +46,12 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+    //shimmer
+    def shimmer_version = '0.5.0'
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
+    implementation 'com.pkmmte.view:circularimageview:1.1'
+
     def appCenterSdkVersion = '4.1.0'
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
     implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"

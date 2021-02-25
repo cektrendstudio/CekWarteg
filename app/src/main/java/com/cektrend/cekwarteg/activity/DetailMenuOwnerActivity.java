@@ -1,4 +1,4 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.cektrend.cekwarteg.R;
 
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MENU_DESC;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MENU_ID;

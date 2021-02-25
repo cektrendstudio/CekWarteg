@@ -19,9 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.cektrend.cekwarteg.DetailMenuActivity;
-import com.cektrend.cekwarteg.DetailWartegActivity;
 import com.cektrend.cekwarteg.R;
+import com.cektrend.cekwarteg.activity.DetailMenuActivity;
 import com.cektrend.cekwarteg.data.DataMenuOwner;
 import com.cektrend.cekwarteg.data.DataWarteg;
 
@@ -61,7 +60,6 @@ public class DetailWartegAdapter extends RecyclerView.Adapter<DetailWartegAdapte
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Warteg " + datalist.get(position).getName() + " Di Klik!", Toast.LENGTH_SHORT).show();
                 Intent detWarteg = new Intent(context, DetailMenuActivity.class);
                 detWarteg.putExtra("id", String.valueOf(datalist.get(position).getId()));
                 Log.d("TAG", "menuid : " + datalist.get(position).getId());
