@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardFragment">
+    tools:context=".fragment.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="5.0"
+                            android:text="@string/ex_rating"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -69,7 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Total Rating"
+                            android:text="@string/title_total_rating"
                             android:textColor="#A8A8A8"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="100K"
+                            android:text="@string/ex_100k"
                             android:textColor="@color/black"
                             android:textSize="56sp"
                             android:textStyle="bold" />
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Total Views"
+                            android:text="@string/title_total_views"
                             android:textColor="#A8A8A8"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -134,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="50K"
+                            android:text="@string/ex_50k"
                             android:textColor="@color/black"
                             android:textSize="56sp"
                             android:textStyle="bold" />
@@ -143,7 +143,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Total Favorite"
+                            android:text="@string/title_total_favorite"
                             android:textColor="#A8A8A8"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -170,7 +170,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="69"
+                            android:text="@string/ex_variant_manu"
                             android:textColor="@color/black"
                             android:textSize="56sp"
                             android:textStyle="bold" />
@@ -179,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Variant Menu"
+                            android:text="@string/title_variant_menu"
                             android:textColor="#A8A8A8"
                             android:textSize="16sp"
                             android:textStyle="bold" />

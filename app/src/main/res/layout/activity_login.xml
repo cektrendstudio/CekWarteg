@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="242dp"
         android:layout_height="228dp"
         android:layout_marginTop="50dp"
-        android:contentDescription="Image Login"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/draw_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Welcome"
+            android:text="@string/welcome_title"
             android:textColor="@color/black"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
-            android:text="Forgot your Password?"
+            android:text="@string/forgot_password"
             android:textColor="#FFBD2F"
             android:textSize="15sp"
             android:textStyle="italic|bold" />
@@ -82,7 +82,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:background="@drawable/button"
-            android:text="Log in"
+            android:text="@string/title_login_as_owner"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:gravity="center"
-            android:text="or"
+            android:text="@string/titile_or"
             android:textColor="#313131"
             android:textSize="18sp"
             android:textStyle="bold|italic" />
@@ -106,7 +106,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/white"
-            android:text="Register your Warteg"
+            android:text="@string/titile_register_your_warteg"
             app:cornerRadius="5dp"
             android:textAllCaps="false"
             android:textColor="@color/black"

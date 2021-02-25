@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".ProfileFragment">
+    tools:context=".fragment.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Profile Warteg"
+                android:text="@string/title_profile_warteg"
                 android:textAlignment="center"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_marginTop="30dp"
-                android:hint="Warteg name"
+                android:hint="@string/warteg_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title">
@@ -65,8 +65,10 @@
                     android:id="@+id/edt_warteg_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="@string/warteg_name"
                     android:background="@color/white"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:labelFor="@id/edt_warteg_name" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/email"
                     android:background="@color/white"
-                    android:hint="Email"
+                    android:hint="@string/warteg_email"
                     android:inputType="textEmailAddress"
                     android:textColorHint="#FFBD2F" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/username"
                     android:background="@color/white"
-                    android:hint="Owner name"
+                    android:hint="@string/warteg_owner_name"
                     android:inputType="textPersonName"
                     android:textColorHint="#FFBD2F" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/username"
                     android:background="@color/white"
-                    android:hint="Alamat"
+                    android:hint="@string/warteg_address"
                     android:inputType="textPersonName"
                     android:textColorHint="#FFBD2F" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -144,8 +146,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/username"
                     android:background="@color/white"
-                    android:hint="No. Telp"
-                    android:inputType="textPersonName"
+                    android:hint="@string/warteg_telp"
+                    android:inputType="phone"
                     android:textColorHint="#FFBD2F" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,8 +186,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="Deskripsi"
                     android:background="@color/white"
-                    android:gravity="top|left"
-                    android:hint="Deskripsi..."
+                    android:gravity="start"
+                    android:hint="@string/menu_desc"
                     android:inputType="textMultiLine"
                     android:lines="10"
                     android:maxLines="15"
@@ -199,7 +201,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#FFBD2F"
-                android:text="Simpan Perubahan"
+                android:text="@string/title_btn_save"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>

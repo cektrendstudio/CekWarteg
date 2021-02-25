@@ -10,16 +10,26 @@
     android:elevation="10dp"
     android:padding="12dp">
 
+    <ProgressBar
+        android:id="@+id/loading_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/img_warteg"
+        app:layout_constraintEnd_toEndOf="@+id/img_warteg"
+        app:layout_constraintStart_toStartOf="@+id/img_warteg"
+        app:layout_constraintTop_toTopOf="@+id/img_warteg" />
+
     <ImageView
         android:id="@+id/img_warteg"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#B7B7B7"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_launcher_foreground"
         app:cornerRadius="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#B7B7B7"
+        tools:src="@drawable/ic_launcher_foreground" />
 
     <androidx.appcompat.widget.AppCompatRatingBar
         android:id="@+id/rating_toko"
@@ -33,7 +43,6 @@
         android:rating="4"
         android:secondaryProgressTint="@color/backgroundColor"
         android:stepSize="0.5"
-
         app:layout_constraintStart_toStartOf="@+id/warteg_name"
         app:layout_constraintTop_toBottomOf="@+id/warteg_name" />
 
@@ -42,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Warlong"
+        tools:text="Warlong"
         android:textColor="#313131"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -54,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Lorem ipsum"
+        tools:text="Lorem ipsum"
         android:textColor="#B2B2B2"
         android:textSize="8sp"
         android:textStyle="bold"

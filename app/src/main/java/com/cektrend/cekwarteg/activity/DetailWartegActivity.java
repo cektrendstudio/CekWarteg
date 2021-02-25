@@ -1,10 +1,11 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.activity;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +23,11 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.cektrend.cekwarteg.BuildConfig;
+import com.cektrend.cekwarteg.R;
 import com.cektrend.cekwarteg.adapter.DetailWartegAdapter;
 import com.cektrend.cekwarteg.data.DataMenuOwner;
 
@@ -38,6 +45,7 @@ public class DetailWartegActivity extends AppCompatActivity {
     ProgressDialog pDialog;
     RatingBar ratingWarteg;
     private RecyclerView recyclerView;
+    private Toolbar toolbar;
 
     private String wartegId;
     private String descWarteg;
@@ -62,7 +70,7 @@ public class DetailWartegActivity extends AppCompatActivity {
 
     }
 
-    private void showDetailWarteg(){
+    private void showDetailWarteg() {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Memuat ...");
@@ -76,7 +84,7 @@ public class DetailWartegActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-                           // Log.e("TAGt", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
+                            // Log.e("TAGt", "Nama Wateg : " + response.getJSONObject("data").getString("name"));
                             JSONArray jsonArray = new JSONArray(response.getJSONObject("data").getString("menu"));
                             //Log.e("TAGmenut", "menu : " +jsonArray);
 
@@ -92,7 +100,7 @@ public class DetailWartegActivity extends AppCompatActivity {
                                             data.getBoolean("is_have_stock"),
                                             data.getString("created_at"),
                                             data.getString("updated_at"),
-                                            data.getString("photo") ,
+                                            data.getString("photo"),
                                             data.getString("description")));
                                     adapter = new DetailWartegAdapter(dataMenuOwner, getApplicationContext(), DetailWartegActivity.this);
                                     recyclerView.setAdapter(adapter);
@@ -115,7 +123,7 @@ public class DetailWartegActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Gagal memuat, cobalah periksa koneksi internet anda", Toast.LENGTH_SHORT).show();
                         //    memunculkan Toast saat data gagal ditampilkan
                         hideDialog();
-                        Log.e("TAG", "onResponse: ",error );
+                        Log.e("TAG", "onResponse: ", error);
                     }
                 });
     }
@@ -126,17 +134,23 @@ public class DetailWartegActivity extends AppCompatActivity {
         tvWartegName = findViewById(R.id.tv_warteg_name);
         tvWartegDesc = findViewById(R.id.tv_warteg_desc);
         ratingWarteg = findViewById(R.id.rating_warteg);
+        toolbar = findViewById(R.id.toolbar_detail_warteg);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Informasi Warteg");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private  void _setComponents(){
-     tvWartegName.setText(nameWarteg);
-     tvWartegDesc.setText(descWarteg);
+    private void _setComponents() {
+        tvWartegName.setText(nameWarteg);
+        tvWartegDesc.setText(descWarteg);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
+        requestOptions = requestOptions.override(300, 300);
         Glide.with(this)
-                .load(scrImage) // image url
+                .load(scrImage)
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24) // any placeholder to load at start
                 .error(R.drawable.ic_baseline_image_not_supported_24)
-                .override(300, 300)
-                .centerCrop()
+                .apply(requestOptions)
                 .into(imgWarteg);
     }
 
@@ -147,5 +161,10 @@ public class DetailWartegActivity extends AppCompatActivity {
 
     private void hideDialog() {
         if (pDialog.isShowing()) pDialog.dismiss();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

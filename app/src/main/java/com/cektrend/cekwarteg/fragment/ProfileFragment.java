@@ -1,4 +1,4 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -32,6 +32,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.cektrend.cekwarteg.BuildConfig;
+import com.cektrend.cekwarteg.R;
 import com.cektrend.cekwarteg.adapter.DataMenuOwnerAdapter;
 import com.cektrend.cekwarteg.data.DataMenuOwner;
 import com.google.gson.JsonObject;

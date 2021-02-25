@@ -1,9 +1,10 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -22,6 +24,11 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.cektrend.cekwarteg.BuildConfig;
+import com.cektrend.cekwarteg.R;
 import com.cektrend.cekwarteg.adapter.UlasanAdapter;
 import com.cektrend.cekwarteg.data.DataUlasan;
 
@@ -39,6 +46,7 @@ public class DetailMenuActivity extends AppCompatActivity {
     Button btnSubmit;
     ProgressDialog pDialog;
     Boolean isSuccess = false;
+    private Toolbar toolbar;
 
     String menuName, menuDesc, menuImg, menuId, message;
     UlasanAdapter adapter;
@@ -83,6 +91,10 @@ public class DetailMenuActivity extends AppCompatActivity {
         tvMenuName = findViewById(R.id.tv_menu_name);
         tvMenuDesc = findViewById(R.id.tv_menu_desc);
         ratingMenu = findViewById(R.id.rating_menu);
+        toolbar = findViewById(R.id.toolbar_detail_menu);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Informasi Menu");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         edtReviewerName = findViewById(R.id.edt_reviewer_name);
         edtUlasan = findViewById(R.id.edt_ulasan);
         btnSubmit = findViewById(R.id.btn_submit);
@@ -93,11 +105,13 @@ public class DetailMenuActivity extends AppCompatActivity {
     private void _setComponents() {
         tvMenuName.setText(menuName);
         tvMenuDesc.setText(menuDesc);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
         Glide.with(this)
-                .load(menuImg) // image url
+                .load(menuImg)
                 .placeholder(R.drawable.ic_baseline_image_not_supported_24) // any placeholder to load at start
                 .error(R.drawable.ic_baseline_image_not_supported_24)
-                .centerCrop()
+                .apply(requestOptions)
                 .into(imgMenu);
     }
 
@@ -127,7 +141,7 @@ public class DetailMenuActivity extends AppCompatActivity {
                 .addPathParameter("menu_id", menuId)
                 .addBodyParameter("name", name)
                 .addBodyParameter("reviewText", review)
-//                .addBodyParameter("reviewText", ulas)
+                //                .addBodyParameter("reviewText", ulas)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -174,15 +188,15 @@ public class DetailMenuActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         hideDialog();
                         try {
-//                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
-//                            Log.d("TAG", "String " + response.getString("data"));
+                            //                            Log.d("TAG", "Array " + response.getJSONArray("data").get(0));
+                            //                            Log.d("TAG", "String " + response.getString("data"));
                             JSONObject jsonObject = response.getJSONObject("data");
                             JSONArray jsonArray = jsonObject.getJSONArray("review");
-//                            Log.d("TAG", "Lenght" + jsonArray.length());
+                            //                            Log.d("TAG", "Lenght" + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 Log.d("TAG", "jason" + jsonArray.get(i));
                                 JSONObject data = jsonArray.getJSONObject(i);
-//                                Log.d("TAG", "jason" + data);
+                                //                                Log.d("TAG", "jason" + data);
                                 dataUlasans.add(new DataUlasan(data.getString("name"),
                                         data.getString("review_text"),
                                         data.getString("created_at")));
@@ -203,6 +217,11 @@ public class DetailMenuActivity extends AppCompatActivity {
                         hideDialog();
                     }
                 });
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 
     private void showDialog() {

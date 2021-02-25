@@ -1,4 +1,4 @@
-package com.cektrend.cekwarteg;
+package com.cektrend.cekwarteg.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cektrend.cekwarteg.R;
+import com.cektrend.cekwarteg.fragment.DashboardFragment;
+import com.cektrend.cekwarteg.fragment.DataMenuFragment;
+import com.cektrend.cekwarteg.fragment.ProfileFragment;
+import com.cektrend.cekwarteg.fragment.UlasanFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +39,6 @@ import static com.cektrend.cekwarteg.utils.ConstantUtil.WARTEG_NAME;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    boolean doubleBack = false;
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
@@ -211,23 +215,5 @@ public class DashboardActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBack) {
-            finish();
-            return;
-        }
-        Toast.makeText(this, "Tekan sekali lagi untuk keluar!", Toast.LENGTH_SHORT).show();
-
-        doubleBack = true;
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBack = false;
-            }
-        }, 2000);
     }
 }
