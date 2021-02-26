@@ -41,13 +41,14 @@ import com.cektrend.cekwarteg.adapter.ListWartegAdapter;
 import com.cektrend.cekwarteg.data.DataWarteg;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.cektrend.cekwarteg.utils.ConstantUtil.MY_SHARED_PREFERENCES;
 import static com.cektrend.cekwarteg.utils.ConstantUtil.SESSION_STATUS;
@@ -68,7 +69,7 @@ public class UserDashboardActivity extends AppCompatActivity implements SwipeRef
     SharedPreferences sharedPreferences;
     Boolean session = false;
     String sessionUsername, sessionWartegPhoto;
-    CircularImageView profilePhoto;
+    CircleImageView profilePhoto;
     LinearLayout profileToolbar;
     ImageButton btnAccount;
 
@@ -134,7 +135,7 @@ public class UserDashboardActivity extends AppCompatActivity implements SwipeRef
             Glide.with(this)
                     .load(sessionWartegPhoto)
                     .error(R.drawable.ic_baseline_image_50).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
+                    .centerCrop().placeholder(R.drawable.ic_baseline_image_not_supported_24)
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                     .into(profilePhoto);
         } else {
