@@ -56,15 +56,13 @@
                         android:textStyle="bold"
                         tools:text="Profile" />
 
-                    <com.pkmmte.view.CircularImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_photo"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        app:border="true"
-                        app:border_color="#EEEEEE"
-                        app:border_width="4dp"
-                        app:shadow="true"
-                        tools:src="@drawable/img_kangkung" />
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="1dp"
+                        tools:src="@drawable/ic_baseline_image_not_supported_24" />
                 </LinearLayout>
 
                 <ImageButton
