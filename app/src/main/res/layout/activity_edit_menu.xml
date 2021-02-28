@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EditMenuActivity">
+
+    <include
+        android:id="@+id/toolbar_edit_datamenu"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_edit_datamenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+            <TextView
+                android:id="@+id/tv_menu_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="@string/edit_menu"
+                android:textColor="@color/black"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_menu_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints="Nama Menu.."
+                android:background="@drawable/button"
+                android:hint="@string/menu_name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:cornerRadius="5dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_menu_event" />
+
+            <EditText
+                android:id="@+id/edt_menu_desc"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="@string/menu_desc"
+                android:background="@drawable/button"
+                android:gravity="start"
+                android:hint="@string/menu_desc"
+                android:inputType="textMultiLine"
+                android:lines="10"
+                android:maxLines="15"
+                android:minLines="5"
+                android:padding="10dp"
+                app:cornerRadius="5dp"
+                app:layout_constraintTop_toBottomOf="@id/edt_menu_name" />
+
+            <EditText
+                android:id="@+id/edt_menu_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints="Harga.."
+                android:background="@drawable/button"
+                android:hint="@string/menu_price"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:cornerRadius="5dp"
+                app:layout_constraintTop_toBottomOf="@id/edt_menu_desc" />
+
+            <Button
+                android:id="@+id/btn_choose_img"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/choose_image"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_menu_price"
+                app:strokeWidth="1dp" />
+
+            <ImageView
+                android:id="@+id/img_edit_menu"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_rounded_main_card"
+                android:src="@drawable/ic_baseline_image_50"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/btn_edit_menu"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/button"
+                android:text="@string/title_btn_save"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".fragment.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/loading_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="20dp"
+                android:contentDescription="@string/register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/draw_register" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/title_profile_warteg"
+                android:textAlignment="center"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_warteg_name"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="30dp"
+                android:hint="@string/warteg_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                <EditText
+                    android:id="@+id/edt_warteg_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/warteg_name"
+                    android:background="@color/white"
+                    android:inputType="textPersonName"
+                    android:labelFor="@id/edt_warteg_name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_email"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_warteg_name">
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/email"
+                    android:background="@color/white"
+                    android:hint="@string/warteg_email"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_owner_name"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_email">
+
+                <EditText
+                    android:id="@+id/edt_owner_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/username"
+                    android:background="@color/white"
+                    android:hint="@string/warteg_owner_name"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_addres"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_email">
+
+                <EditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/username"
+                    android:background="@color/white"
+                    android:hint="@string/warteg_address"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_phone"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_email">
+
+                <EditText
+                    android:id="@+id/edt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/username"
+                    android:background="@color/white"
+                    android:hint="@string/warteg_telp"
+                    android:inputType="phone"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_username"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_owner_name">
+
+                <EditText
+                    android:id="@+id/edt_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/username"
+                    android:background="@color/white"
+                    android:hint="@string/username"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ti_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ti_username">
+
+                <EditText
+                    android:id="@+id/edt_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Deskripsi"
+                    android:background="@color/white"
+                    android:gravity="start"
+                    android:hint="@string/menu_desc"
+                    android:inputType="textMultiLine"
+                    android:lines="10"
+                    android:maxLines="15"
+                    android:minLines="5"
+                    android:textColorHint="#FFBD2F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_edit_warteg"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#FFBD2F"
+                android:text="@string/title_btn_save"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

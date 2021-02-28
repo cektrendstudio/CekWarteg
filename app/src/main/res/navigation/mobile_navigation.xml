@@ -22,4 +22,10 @@
         android:name="com.cektrend.cekwarteg.UlasanFragment"
         android:label="Ulasan"
         tools:layout="@layout/fragment_ulasan" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.cektrend.cekwarteg.ProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
