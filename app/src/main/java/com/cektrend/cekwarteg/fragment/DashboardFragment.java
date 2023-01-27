@@ -22,7 +22,7 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         initComponents(root);
-
+        toast;
         return root;
     }
 
